@@ -29,7 +29,12 @@ func InitDb() {
 			//TablePrefix: "gormv2_", //表前缀
 			SingularTable: true,
 		},
+		// gorm日志模式：silent
 		Logger: logger.Default.LogMode(logger.Silent),
+		// 外键约束
+		DisableForeignKeyConstraintWhenMigrating: true,
+		// 禁用默认事务（提高运行速度）
+		SkipDefaultTransaction: true,
 	})
 	if err != nil {
 		fmt.Println("连接数据库失败", err)
