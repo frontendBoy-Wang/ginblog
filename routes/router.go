@@ -16,7 +16,7 @@ import (
 func InitRouter() {
 	gin.SetMode(utils.AppMode)
 	r := gin.Default()
-	r.Use(middleware.Cros(), middleware.CalcTimeMiddleWare())
+	r.Use(middleware.Cros())
 	router := r.Group("api/")
 
 	r1 := router.Group("v1/")
