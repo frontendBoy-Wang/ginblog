@@ -30,10 +30,17 @@ func InitRouter() {
 		//分类模块
 		r1.POST("category/add", api.AddCate)       //添加分类
 		r1.GET("category/list", api.QueryCateList) //查询分类列表
+		r1.GET("category", api.QueryCateInfo)      //查询单个分类
 		r1.PUT("category/:id", api.UpdateCate)     //更新分类信息
 		r1.DELETE("category/:id", api.DelCate)     //删除分类
-		//文章模块
 
+		//文章模块
+		r1.POST("article/add", api.AddArticle)         //添加文章
+		r1.GET("article/list", api.QueryArticleList)   //查询文章列表
+		r1.GET("article", api.QueryArticleInfo)        //查询单个文章
+		r1.GET("cate/article", api.QueryArticleInCate) //查询分类下的文章
+		r1.PUT("article/:id", api.UpdateArticle)       //更新文章
+		r1.DELETE("article/:id", api.DelArticle)       //删除文章
 	}
 
 	srv := &http.Server{

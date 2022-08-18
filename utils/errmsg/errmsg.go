@@ -13,10 +13,12 @@ const (
 	ERROT_TOKEN_WRONG      = 1006
 	ERROR_TOKEN_TYPE_WRONG = 1007
 
-	//2000 分类模块错误代码
-	ERROR_CATENAME_USED = 2001
+	//2000 文章模块错误码
+	ERROR_ARTICLE_NOT_FOUND = 2001
 
-	//3000 文章模块错误码
+	//3000 分类模块错误代码
+	ERROR_CATENAME_USED      = 3001
+	ERROR_CATENAME_NOT_FOUND = 3002
 )
 
 var codeMsg = map[int]string{
@@ -29,7 +31,11 @@ var codeMsg = map[int]string{
 	ERROT_TOKEN_RUNTIME:    "token已过期",
 	ERROT_TOKEN_WRONG:      "token不正确",
 	ERROR_TOKEN_TYPE_WRONG: "token格式错误",
-	ERROR_CATENAME_USED:    "分类已经存在",
+
+	ERROR_ARTICLE_NOT_FOUND: "文章不存在",
+
+	ERROR_CATENAME_USED:      "分类已经存在",
+	ERROR_CATENAME_NOT_FOUND: "分类不存在",
 }
 
 // GetErrMsg 错误代码

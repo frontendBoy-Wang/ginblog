@@ -29,9 +29,14 @@ func CreateCate(data *Category) int {
 	return errmsg.SUCCESS
 }
 
-// QueryArticleListInCate todo 查询分类下的所有文章
-func QueryArticleListInCate() {
-
+//GetCateInfo 查询单个分类
+func GetCateInfo(id int) (Category, int) {
+	var cate Category
+	err = db.Where("id = ?", id).First(&cate).Error
+	if err != nil {
+		return cate, errmsg.ERROR
+	}
+	return cate, errmsg.SUCCESS
 }
 
 // GetCate 查询分类列表

@@ -2,58 +2,21 @@ package utils
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
-// SuccessResponse 成功的返回
-func SuccessResponse(data ...interface{}) gin.H {
-	code := 0
-	message := "成功"
-	params := gin.H{}
+// Success 成功的返回
+func Success(c *gin.Context, data gin.H, msg string) {
+	Response(c, http.StatusOK, 200, data, msg)
 
-	for _, value := range data {
-		switch value.(type) {
-		case int:
-			code = value.(int)
-		case string:
-			message = value.(string)
-		case gin.H:
-			params = value.(gin.H)
-		}
-	}
-
-	return Response(code, message, params)
 }
 
-// ErrorResponse 成功的返回
-func ErrorResponse(data ...interface{}) gin.H {
-	code := -1
-	message := "错误"
-	params := gin.H{}
-
-	for _, value := range data {
-		switch value.(type) {
-		case int:
-			code = value.(int)
-		case string:
-			message = value.(string)
-		case gin.H:
-			params = value.(gin.H)
-		}
-	}
-
-	return Response(code, message, params)
+// Fail 失败的返回
+func Fail(c *gin.Context, data gin.H, msg string) {
+	Response(c, http.StatusOK, 500, data, msg)
 }
 
 // Response 通用返回
-func Response(code int, message string, params gin.H) gin.H {
-	response := gin.H{
-		"code":    code,
-		"message": message,
-	}
-
-	for index, value := range params {
-		response[index] = value
-	}
-
-	return response
+func Response(c *gin.Context, httpStatus, code int, data gin.H, msg string) {
+	c.JSON(httpStatus, gin.H{"status": code, "msg": msg, "data": data})
 }

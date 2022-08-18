@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"time"
@@ -16,17 +15,7 @@ func Cros() gin.HandlerFunc {
 			AllowHeaders:     []string{"*", "Authorization"},
 			ExposeHeaders:    []string{"Content-Length", "text/plain", "Authorization", "Content-Type"},
 			AllowCredentials: true,
-			MaxAge:           12 * time.Hour,
+			MaxAge:           24 * time.Hour,
 		},
 	)
-}
-
-func CalcTimeMiddleWare() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		start := time.Now()
-		c.Next()
-		// 统计时间
-		since := time.Since(start)
-		fmt.Println("程序用时：", since)
-	}
 }
