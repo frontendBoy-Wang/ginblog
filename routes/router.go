@@ -17,30 +17,35 @@ func InitRouter() {
 	gin.SetMode(utils.AppMode)
 	r := gin.Default()
 	r.Use(middleware.Cros())
-	router := r.Group("api/")
-
-	r1 := router.Group("v1/")
+	Auth := r.Group("api/v1")
+	Auth.Use(middleware.JwtToken())
 	{
 		//用户模块
-		r1.POST("user/add", api.AddUser)       //添加用户
-		r1.GET("user/list", api.QueryUserList) //查询用户列表
-		r1.PUT("user/:id", api.UpdateUser)     //更新用户信息
-		r1.DELETE("user/:id", api.DelUser)     //删除用户
+		Auth.POST("user/add", api.AddUser)   //添加用户
+		Auth.PUT("user/:id", api.UpdateUser) //更新用户信息
+		Auth.DELETE("user/:id", api.DelUser) //删除用户
 
 		//分类模块
-		r1.POST("category/add", api.AddCate)       //添加分类
-		r1.GET("category/list", api.QueryCateList) //查询分类列表
-		r1.GET("category", api.QueryCateInfo)      //查询单个分类
-		r1.PUT("category/:id", api.UpdateCate)     //更新分类信息
-		r1.DELETE("category/:id", api.DelCate)     //删除分类
+		Auth.POST("category/add", api.AddCate)   //添加分类
+		Auth.PUT("category/:id", api.UpdateCate) //更新分类信息
+		Auth.DELETE("category/:id", api.DelCate) //删除分类
 
 		//文章模块
-		r1.POST("article/add", api.AddArticle)         //添加文章
-		r1.GET("article/list", api.QueryArticleList)   //查询文章列表
-		r1.GET("article", api.QueryArticleInfo)        //查询单个文章
-		r1.GET("cate/article", api.QueryArticleInCate) //查询分类下的文章
-		r1.PUT("article/:id", api.UpdateArticle)       //更新文章
-		r1.DELETE("article/:id", api.DelArticle)       //删除文章
+		Auth.POST("article/add", api.AddArticle)   //添加文章
+		Auth.PUT("article/:id", api.UpdateArticle) //更新文章
+		Auth.DELETE("article/:id", api.DelArticle) //删除文章
+	}
+
+	router := r.Group("api/v1")
+	{
+		router.GET("user/list", api.QueryUserList)         //查询用户列表
+		router.GET("category/list", api.QueryCateList)     //查询分类列表
+		router.GET("category", api.QueryCateInfo)          //查询单个分类
+		router.GET("article/list", api.QueryArticleList)   //查询文章列表
+		router.GET("article", api.QueryArticleInfo)        //查询单个文章
+		router.GET("cate/article", api.QueryArticleInCate) //查询分类下的文章
+		router.POST("login", api.Login)                    //登陆
+
 	}
 
 	srv := &http.Server{
