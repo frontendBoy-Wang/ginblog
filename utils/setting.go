@@ -50,9 +50,9 @@ func LoadData(file *ini.File) {
 }
 
 func QiNiuSever(file *ini.File) {
-	AccessKey = file.Section("qiniu").Key("AccessKey").MustString("mysql")
-	SecretKey = file.Section("SecretKey").Key("SecretKey").MustString("mysql")
-	Bucket = file.Section("Bucket").Key("Bucket").MustString("mysql")
-	QiniuSever = file.Section("QiniuSever").Key("QiniuSever").MustString("mysql")
+	AccessKey = file.Section("qiniu").Key("AccessKey").MustString("uTqVVr28kQngc_29kqcmaDuFUuRY7uhKs2-LaiI6")
+	SecretKey = file.Section("qiniu").Key("SecretKey").MustString("7yvNZ8ATw7rztceSb0G5YS9pL_Trz57LUbf7c88c")
+	Bucket = file.Section("qiniu").Key("Bucket").MustString("blog-frontendwang")
+	QiniuSever = file.Section("qiniu").Key("QiniuSever").MustString("http://rgtoella9.hd-bkt.clouddn.com/")
 
 }

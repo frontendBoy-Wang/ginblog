@@ -34,18 +34,25 @@ func InitRouter() {
 		Auth.POST("article/add", api.AddArticle)   //添加文章
 		Auth.PUT("article/:id", api.UpdateArticle) //更新文章
 		Auth.DELETE("article/:id", api.DelArticle) //删除文章
+
+		//文件上传
+		//Auth.POST("upload", api.Upload) //七牛云文件上传
+
 	}
 
 	router := r.Group("api/v1")
 	{
-		router.GET("user/list", api.QueryUserList)         //查询用户列表
-		router.GET("category/list", api.QueryCateList)     //查询分类列表
-		router.GET("category", api.QueryCateInfo)          //查询单个分类
-		router.GET("article/list", api.QueryArticleList)   //查询文章列表
-		router.GET("article", api.QueryArticleInfo)        //查询单个文章
-		router.GET("cate/article", api.QueryArticleInCate) //查询分类下的文章
-		router.POST("login", api.Login)                    //登陆
+		router.GET("user/list", api.QueryUserList) //查询用户列表
 
+		router.GET("category/list", api.QueryCateList)         //查询分类列表
+		router.GET("category", api.QueryCateInfo)              //查询单个分类
+		router.GET("category/article", api.QueryArticleInCate) //查询分类下的文章
+
+		router.GET("article/list", api.QueryArticleList) //查询文章列表
+		router.GET("article", api.QueryArticleInfo)      //查询单个文章
+		router.POST("login", api.Login)                  //登陆
+
+		router.POST("upload", api.Upload) //七牛云文件上传
 	}
 
 	srv := &http.Server{
