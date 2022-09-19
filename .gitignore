@@ -1,3 +1,4 @@
 .idea
 tmp
 web/admin/node_modules
+web/frontend/node_modules
