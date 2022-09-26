@@ -32,12 +32,11 @@ func AddUser(c *gin.Context) {
 func QueryUserList(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.DefaultQuery("pageSize", "0"))
 	pageNum, _ := strconv.Atoi(c.DefaultQuery("pageNum", "0"))
-
 	if pageNum == 0 {
-		pageSize = -1
+		pageNum = 0
 	}
 	if pageSize == 0 {
-		pageSize = -1
+		pageSize = 0
 	}
 	data := model.GetUsers(pageSize, pageNum)
 	code = errmsg.SUCCESS

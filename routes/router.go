@@ -21,7 +21,7 @@ func InitRouter() {
 	Auth.Use(middleware.JwtToken())
 	{
 		//用户模块
-		Auth.POST("user/add", api.AddUser)   //添加用户
+		//Auth.POST("user/add", api.AddUser)   //添加用户
 		Auth.PUT("user/:id", api.UpdateUser) //更新用户信息
 		Auth.DELETE("user/:id", api.DelUser) //删除用户
 
@@ -43,6 +43,7 @@ func InitRouter() {
 	router := r.Group("api/v1")
 	{
 		router.GET("user/list", api.QueryUserList) //查询用户列表
+		router.POST("user/add", api.AddUser)       //添加用户
 
 		router.GET("category/list", api.QueryCateList)         //查询分类列表
 		router.GET("category", api.QueryCateInfo)              //查询单个分类
